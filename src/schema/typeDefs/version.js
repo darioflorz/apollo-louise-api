@@ -18,6 +18,7 @@ type Version {
   version_key: String,
   version_name: String,
   product: Product,
+  medias: [Media],
   subtitles: [Subtitle]
 }
 

@@ -13,6 +13,10 @@ const versionResolver = {
           const res_1 = await louiseApi.getProduct(version.product_key);
           return res_1.data;
         },
+        async medias(version){
+          const res_1 = await louiseApi.getVersionMedias(version.id);
+          return res_1.data;
+        },
         async subtitles(version){
           const res_1 = await louiseApi.getVersionSubtitles(version.id);
           return res_1.data;

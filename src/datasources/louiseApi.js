@@ -30,6 +30,10 @@ async function getVersion(versionId){
     return get(`versions/${versionId}`);
 }
 
+async function getVersionMedias(versionId){
+    return get(`versions/${versionId}/media`);
+}
+
 async function getVersionSubtitles(versionId){
     return get(`versions/${versionId}/subtitles`);
 }
@@ -53,5 +57,6 @@ export {
     getExposure,
     getMedia,
     getVersion,
+    getVersionMedias,
     getVersionSubtitles
 }
