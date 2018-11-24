@@ -1,4 +1,4 @@
-import * as louiseApi from '../../schema/louiseApi';
+import * as louiseApi from '../../datasources/louiseApi';
 
 const versionResolver = {
     Query: {
