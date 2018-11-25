@@ -3,7 +3,7 @@ import { gql } from 'apollo-server';
 const Product = gql`
 extend type Query {
   product(id: ID): Product,
-  products(media_id: String, serie_key: String, client_reference: String) : [Product]
+  products(ids:[ID], media_id: String, serie_key: String, client_reference: String) : [Product]
 }
 
 type Product {

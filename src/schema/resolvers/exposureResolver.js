@@ -4,15 +4,12 @@ const exposureResolver = {
   Query: {
     async exposure(root, args, context, info) {
       // code to get data from db / other source
-      const res_1 = await louiseApi.getExposure(args.id);
-      return res_1.data;
+      return louiseApi.getExposure(args.id);
     }
   },
   Exposure: {
     async product(exposure) {
-      // code to get data from db / other source
-      const res_1 = await louiseApi.getProduct(exposure.product_key);
-      return res_1.data;
+      return louiseApi.getProduct(exposure.product_key);
     },
   }
 };

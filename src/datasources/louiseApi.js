@@ -14,6 +14,12 @@ async function getProduct(productId){
     return get(`products/${productId}`);
 }
 
+async function getProductsByIds(productIds){
+    return Promise.all(
+        productIds.map(productId => this.getProduct(productId)),
+    );
+}
+
 async function getProductBroadcasts(productId){
     return get(`products/${productId}/broadcasts`);
 }
@@ -45,7 +51,8 @@ async function get(url) {
     var url = louiseUrl + '/' + url;
     console.log(url);
     const res = await fetch(url, { headers: headers });
-    return res.json();
+    const result = await res.json();
+    return result.data;
 }
 
 export {
@@ -58,5 +65,6 @@ export {
     getMedia,
     getVersion,
     getVersionMedias,
-    getVersionSubtitles
+    getVersionSubtitles,
+    getProductsByIds
 }

@@ -4,22 +4,18 @@ const versionResolver = {
     Query: {
       async version(root, args, context, info) {
         // code to get data from db / other source
-        const res_1 = await louiseApi.getVersion(args.id);
-        return res_1.data;
+        return louiseApi.getVersion(args.id);
       },
     },
     Version: {
         async product(version){
-          const res_1 = await louiseApi.getProduct(version.product_key);
-          return res_1.data;
+          return louiseApi.getProduct(version.product_key);
         },
         async medias(version){
-          const res_1 = await louiseApi.getVersionMedias(version.id);
-          return res_1.data;
+          return louiseApi.getVersionMedias(version.id);
         },
         async subtitles(version){
-          const res_1 = await louiseApi.getVersionSubtitles(version.id);
-          return res_1.data;
+          return louiseApi.getVersionSubtitles(version.id);
         },
     }
   };
