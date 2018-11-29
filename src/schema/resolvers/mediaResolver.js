@@ -1,21 +1,17 @@
-import * as louiseApi from '../../datasources/louiseApi';
-
 const mediaResolver = {
   Query: {
-    async media(root, args, context, info) {
+    async media(_root, {id}, {dataSources}, _info) {
       // code to get data from db / other source
-      return louiseApi.getMedia(args.id);
+      return dataSources.LouiseAPI.getMedia(id);
     },
-    async medias(root, args, context, info) {
-      var url_1 = `media_id=${args.media_id}`;
-      var url = `media?${url_1}`;
-      
-      return louiseApi.get(url);
+    async medias(_root, {media_id}, {dataSources}, _info) {
+      var url = `media?media_id=${media_id}`;  
+      return dataSources.LouiseAPI.getResult(url);
     },
   },
   Media: {
-    async version(media) {
-      return louiseApi.getVersion(media.version_key);
+    async version(media, _args, {dataSources}, _info) {
+      return dataSources.LouiseAPI.getVersion(media.version_key);
     },
   }
 };

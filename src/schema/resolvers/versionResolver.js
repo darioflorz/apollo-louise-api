@@ -1,21 +1,19 @@
-import * as louiseApi from '../../datasources/louiseApi';
-
 const versionResolver = {
     Query: {
-      async version(root, args, context, info) {
+      async version(_root, {id}, {dataSources}, _info) {
         // code to get data from db / other source
-        return louiseApi.getVersion(args.id);
+        return dataSources.LouiseAPI.getVersion(id);
       },
     },
     Version: {
-        async product(version){
-          return louiseApi.getProduct(version.product_key);
+        async product(version, _args, {dataSources}, _info){
+          return dataSources.LouiseAPI.getProduct(version.product_key);
         },
-        async medias(version){
-          return louiseApi.getVersionMedias(version.id);
+        async medias(version, _args, {dataSources}, _info){
+          return dataSources.LouiseAPI.getVersionMedias(version.id);
         },
-        async subtitles(version){
-          return louiseApi.getVersionSubtitles(version.id);
+        async subtitles(version, _args, {dataSources}, _info){
+          return dataSources.LouiseAPI.getVersionSubtitles(version.id);
         },
     }
   };

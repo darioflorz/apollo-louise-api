@@ -1,15 +1,13 @@
-import * as louiseApi from '../../datasources/louiseApi';
-
 const exposureResolver = {
   Query: {
-    async exposure(root, args, context, info) {
+    async exposure(_root, {id}, {dataSources}, _info) {
       // code to get data from db / other source
-      return louiseApi.getExposure(args.id);
+      return dataSources.LouiseAPI.getExposure(id);
     }
   },
   Exposure: {
-    async product(exposure) {
-      return louiseApi.getProduct(exposure.product_key);
+    async product(exposure, _args, {dataSources}, _info) {
+      return dataSources.LouiseAPI.getProduct(exposure.product_key);
     },
   }
 };

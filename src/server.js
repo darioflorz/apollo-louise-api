@@ -1,5 +1,6 @@
 import 'babel-polyfill' // some issue with async functions https://github.com/babel/babel/issues/5085
 import { ApolloServer } from 'apollo-server';
+import {LouiseAPI} from './datasources/louiseApi';
 import dotev from 'dotenv';
 dotev.config(); // set up enviromentvariables
 import {schema} from './schema/schema';
@@ -7,7 +8,10 @@ import {schema} from './schema/schema';
 const PORT = process.env.PORT || 4000;
 
 const server = new ApolloServer({
-  schema
+  schema,
+  dataSources: () => ({
+    LouiseAPI: new LouiseAPI(),
+  }),
 });
 
 

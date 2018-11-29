@@ -1,70 +1,64 @@
-import fetch from 'node-fetch';
+import {RESTDataSource} from 'apollo-datasource-rest'
 
-// cannot use enviroment variables here for some reason.
+class LouiseAPI extends RESTDataSource {
+    constructor() {
+      super();
+      this.baseURL = process.env.LOUISE_URL;
+      this.token = process.env.LOUISE_KEY;
+    }
+    
 
-async function getExposure(exposureId){
-    return get(`exposures/${exposureId}`);
+    willSendRequest(request) {
+        request.headers.set('x-api-key', this.token);
+    }
+
+    async getExposure(exposureId){
+        return this.getResult(`exposures/${exposureId}`);
+    }
+    
+    async getMedia(mediaId){
+        return this.getResult(`media/${mediaId}`);
+    }
+    
+    async getProduct(productId){
+        return this.getResult(`products/${productId}`);
+    }
+    
+    async getProductsByIds(productIds){
+        return Promise.all(
+            productIds.map(productId => this.getProduct(productId)),
+        );
+    }
+    
+    async getProductBroadcasts(productId){
+        return this.getResult(`products/${productId}/broadcasts`);
+    }
+    
+    async getProductExposures(productId){
+        return this.getResult(`Products/${productId}/exposures`);
+    }
+    
+    async getProductVersions(productId){
+        return this.getResult(`products/${productId}/versions`);
+    }
+    
+    async getVersion(versionId){
+        return this.getResult(`versions/${versionId}`);
+    }
+    
+    async getVersionMedias(versionId){
+        return this.getResult(`versions/${versionId}/media`);
+    }
+    
+    async getVersionSubtitles(versionId){
+        return this.getResult(`versions/${versionId}/subtitles`);
+    }
+    
+    async getResult(path){
+        //console.log(`- ${this.baseURL}/${path}`);
+        const result = await this.get(path);
+        return result.data;
+    }
 }
 
-async function getMedia(mediaId){
-    return get(`media/${mediaId}`);
-}
-
-async function getProduct(productId){
-    return get(`products/${productId}`);
-}
-
-async function getProductsByIds(productIds){
-    return Promise.all(
-        productIds.map(productId => this.getProduct(productId)),
-    );
-}
-
-async function getProductBroadcasts(productId){
-    return get(`products/${productId}/broadcasts`);
-}
-
-async function getProductExposures(productId){
-    return get(`Products/${productId}/exposures`);
-}
-
-async function getProductVersions(productId){
-    return get(`products/${productId}/versions`);
-}
-
-async function getVersion(versionId){
-    return get(`versions/${versionId}`);
-}
-
-async function getVersionMedias(versionId){
-    return get(`versions/${versionId}/media`);
-}
-
-async function getVersionSubtitles(versionId){
-    return get(`versions/${versionId}/subtitles`);
-}
-
-async function get(url) {
-    // code to get data from db / other source
-    const headers = { 'x-api-key': process.env.LOUISE_KEY };
-    const louiseUrl = process.env.LOUISE_URL;
-    var url = louiseUrl + '/' + url;
-    console.log(url);
-    const res = await fetch(url, { headers: headers });
-    const result = await res.json();
-    return result.data;
-}
-
-export {
-    get,
-    getProduct,
-    getProductVersions,
-    getProductExposures,
-    getProductBroadcasts,
-    getExposure,
-    getMedia,
-    getVersion,
-    getVersionMedias,
-    getVersionSubtitles,
-    getProductsByIds
-}
+export {LouiseAPI}
