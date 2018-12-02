@@ -6,7 +6,7 @@ I decide to split up the schema in many files and then build up the schema using
 ## Resources
 * enviroment variables : 
     - https://www.youtube.com/watch?v=HRBNeERE5PU
-* Modularie schema : 
+* Modularizing schemas : 
     - https://blog.apollographql.com/modularizing-your-graphql-schema-code-d7f71d5ed5f2
     - https://www.youtube.com/watch?v=4XmQi80nFes
 * Run node server using ES6:
