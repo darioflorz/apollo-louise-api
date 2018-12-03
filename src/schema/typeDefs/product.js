@@ -30,6 +30,7 @@ type Product {
     broadcasts: [Broadcast],
     exposures: [Exposure],
     versions: [Version],
+    cometProgram: CometProgram,
     
 }
 

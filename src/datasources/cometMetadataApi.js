@@ -12,8 +12,13 @@ class CometMetadataAPI extends RESTDataSource {
     }
 
     async getProduct(reference){
-        const result = await this.get(`programs/data?reference=${reference}&providerId=2`);
-        return result[0];
+        try {
+            const result = await this.get(`programs/data?reference=${reference}&providerId=2`);
+            return result[0];
+        } catch (error) {
+            return null;
+        }
+        
     }
 }
 

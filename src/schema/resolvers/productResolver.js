@@ -28,6 +28,9 @@ const productResolver = {
     async versions(product, _args, {dataSources}, _info) {
       return dataSources.LouiseAPI.getProductVersions(product.product_key);
     },
+    async cometProgram(product, _args, {dataSources}, _info) {
+      return dataSources.CometMetadataAPI.getProduct(product.product_key);
+    },
   }
 };
 
